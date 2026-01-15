@@ -25,6 +25,10 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/com
 
 import generatedBg from "@assets/generated_images/minimalist_abstract_healthy_nutrition_background.png";
 
+import professionalYoungW5C01C7Cb from "@assets/stock_images/professional_young_w_5c01c7cb.jpg";
+import fitYoungManSmilin8416Ea4d from "@assets/stock_images/fit_young_man_smilin_8416ea4d.jpg";
+import matureWomanSmilingC3D7Bc31 from "@assets/stock_images/mature_woman_smiling_c3d7bc31.jpg";
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -584,7 +588,7 @@ function Trust() {
       idade: 29,
       resultado: "-6kg em 3 meses",
       tipo: "Problema de Adesão",
-      foto: "https://i.pravatar.cc/300?img=47",
+      foto: professionalYoungW5C01C7Cb,
       texto: "Eu sempre abandonava a dieta na primeira semana porque tinha alimentos que eu não gostava. Com o Swapp, troquei tudo e continuei no plano. Já são 3 meses seguindo!"
     },
     {
@@ -592,7 +596,7 @@ function Trust() {
       idade: 35,
       resultado: "Ganho de massa muscular",
       tipo: "Autonomia",
-      foto: "https://i.pravatar.cc/300?img=33",
+      foto: fitYoungManSmilin8416Ea4d,
       texto: "Antes eu travava quando não tinha o ingrediente. Agora eu abro o Swapp, troco em 30 segundos e sigo o dia. Meu nutricionista fica impressionado com minha adesão."
     },
     {
@@ -600,7 +604,7 @@ function Trust() {
       idade: 41,
       resultado: "Emagrecimento",
       tipo: "Vida Real",
-      foto: "https://i.pravatar.cc/300?img=45",
+      foto: matureWomanSmilingC3D7Bc31,
       texto: "Viajo muito a trabalho. O Swapp me salva TODA SEMANA. Monto refeições de hotel, restaurante, aeroporto... sempre dentro das minhas 1.600 kcal."
     },
     {
@@ -939,12 +943,27 @@ function Pricing() {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-[#111827] mb-4 tracking-tight">
-            Planos que cabem no seu bolso
+          <h2 className="text-3xl md:text-5xl font-bold text-[#111827] mb-6 tracking-tight">
+            Quanto vale nunca mais sair da dieta sem querer?
           </h2>
-          <p className="text-lg text-[#6B7280]">
-            Escolha a melhor opção para transformar sua alimentação.
+          <p className="text-lg text-[#6B7280] mb-8">
+            Menos que um delivery saudável por semana. Mais que um app, um nutricionista de bolso que calcula tudo por você.
           </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
+            {[
+              "Trocas ilimitadas de alimentos",
+              "Substituições de refeições completas",
+              "Milhares de alimentos",
+              "Suporte WhatsApp 24/7",
+              "Acesso via WhatsApp"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center justify-center gap-2 p-3 bg-[#F9FAFB] rounded-xl border border-gray-100 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0" />
+                <span className="text-[10px] md:text-xs font-bold text-[#111827] text-center">{item}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -963,9 +982,9 @@ function Pricing() {
               }`}
             >
               {plan.highlight && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-4 py-1 rounded-full text-sm font-bold">
-                  MAIS POPULAR
-                </span>
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-4 py-1.5 rounded-full text-[10px] font-bold shadow-lg flex items-center gap-1 whitespace-nowrap">
+                  <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
+                </div>
               )}
               <div className="mb-8">
                 <h3 className="text-xl font-bold text-[#111827] mb-2">{plan.name}</h3>
