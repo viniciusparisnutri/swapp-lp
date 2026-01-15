@@ -889,47 +889,34 @@ function Trust() {
 function Pricing() {
   const plans = [
     {
-      name: "Gratuito",
-      price: "R$ 0",
-      description: "Ideal para começar.",
-      features: [
-        "5 consultas por mês",
-        "Análise de fotos básica",
-        "Respostas em segundos",
-        "Acesso via WhatsApp"
-      ],
-      buttonText: "Começar agora",
-      highlight: false
-    },
-    {
-      name: "Pro",
+      name: "Plano Mensal",
       price: "R$ 19,90",
       period: "/mês",
-      description: "Para quem quer resultados.",
+      description: "Flexibilidade para começar sua jornada.",
       features: [
-        "Consultas ilimitadas",
-        "Análise de fotos avançada",
-        "Dicas de trocas saudáveis",
-        "Histórico de refeições",
-        "Suporte priorizado"
+        "Trocas ilimitadas de alimentos",
+        "Substituições de refeições completas",
+        "Base de dados com milhares de alimentos",
+        "Suporte via WhatsApp 24/7",
+        "Acesso via WhatsApp"
       ],
-      buttonText: "Assinar Pro",
-      highlight: true
+      buttonText: "Assinar Mensal",
+      highlight: false
     },
     {
-      name: "Família",
-      price: "R$ 49,90",
+      name: "Plano Anual",
+      price: "R$ 14,90",
       period: "/mês",
-      description: "Saúde para toda a casa.",
+      description: "O melhor custo-benefício para resultados duradouros.",
       features: [
-        "Até 4 perfis integrados",
-        "Consultas ilimitadas",
-        "Análise de fotos avançada",
-        "Relatórios comparativos",
-        "Suporte VIP"
+        "Trocas ilimitadas de alimentos",
+        "Substituições de refeições completas",
+        "Base de dados com milhares de alimentos",
+        "Suporte via WhatsApp 24/7",
+        "Acesso via WhatsApp"
       ],
-      buttonText: "Assinar Família",
-      highlight: false
+      buttonText: "Assinar Anual (Economize 25%)",
+      highlight: true
     }
   ];
 
@@ -946,27 +933,12 @@ function Pricing() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#111827] mb-6 tracking-tight">
             Quanto vale nunca mais sair da dieta sem querer?
           </h2>
-          <p className="text-lg text-[#6B7280] mb-8">
+          <p className="text-lg text-[#6B7280]">
             Menos que um delivery saudável por semana. Mais que um app, um nutricionista de bolso que calcula tudo por você.
           </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
-            {[
-              "Trocas ilimitadas de alimentos",
-              "Substituições de refeições completas",
-              "Milhares de alimentos",
-              "Suporte WhatsApp 24/7",
-              "Acesso via WhatsApp"
-            ].map((item, i) => (
-              <div key={i} className="flex items-center justify-center gap-2 p-3 bg-[#F9FAFB] rounded-xl border border-gray-100 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0" />
-                <span className="text-[10px] md:text-xs font-bold text-[#111827] text-center">{item}</span>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {plans.map((plan, idx) => (
             <motion.div
               key={idx}
@@ -975,37 +947,45 @@ function Pricing() {
               whileInView="animate"
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className={`relative p-8 rounded-3xl border ${
+              className={`relative p-10 rounded-[2.5rem] border ${
                 plan.highlight 
                   ? "border-[#10B981] shadow-xl ring-4 ring-[#10B981]/5" 
                   : "border-[#E5E7EB]"
-              }`}
+              } flex flex-col h-full bg-white`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-4 py-1.5 rounded-full text-[10px] font-bold shadow-lg flex items-center gap-1 whitespace-nowrap">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-6 py-2 rounded-full text-[11px] font-bold shadow-lg flex items-center gap-2 whitespace-nowrap uppercase tracking-wider">
                   <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
                 </div>
               )}
-              <div className="mb-8">
-                <h3 className="text-xl font-bold text-[#111827] mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-[#111827]">{plan.price}</span>
-                  {plan.period && <span className="text-[#6B7280]">{plan.period}</span>}
+              
+              <div className="mb-10 text-center">
+                <h3 className="text-2xl font-bold text-[#111827] mb-3">{plan.name}</h3>
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className="text-5xl font-extrabold text-[#111827]">{plan.price}</span>
+                  {plan.period && <span className="text-[#6B7280] font-medium">{plan.period}</span>}
                 </div>
-                <p className="text-[#6B7280] mt-2 text-sm">{plan.description}</p>
+                <p className="text-[#6B7280] mt-4 text-sm leading-relaxed">{plan.description}</p>
               </div>
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-center gap-3 text-[#4B5563] text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-[#10B981]" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+
+              <div className="flex-1">
+                <div className="bg-[#F9FAFB] rounded-2xl p-6 mb-10 border border-gray-50">
+                  <p className="text-xs font-bold text-[#6B7280] uppercase tracking-[0.2em] mb-4">O que você ganha:</p>
+                  <ul className="space-y-4">
+                    {plan.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-3 text-[#4B5563] text-sm font-medium leading-tight">
+                        <CheckCircle2 className="w-5 h-5 text-[#10B981] shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
               <button
-                className={`w-full py-4 rounded-xl font-semibold transition-all ${
+                className={`w-full py-5 rounded-2xl font-bold text-lg transition-all active:scale-95 ${
                   plan.highlight
-                    ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-lg shadow-[#10B981]/20"
+                    ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-[0_15px_30px_rgba(16,185,129,0.25)]"
                     : "bg-[#F3F4F6] text-[#111827] hover:bg-[#E5E7EB]"
                 }`}
               >
