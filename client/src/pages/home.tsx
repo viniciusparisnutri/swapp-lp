@@ -670,70 +670,124 @@ function Trust() {
         </motion.div>
 
         {/* Comparação Sem/Com Swapp */}
-        <motion.div 
-          className="grid md:grid-cols-2 gap-8 mb-20"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
           {/* Sem o Swapp */}
           <motion.div
             variants={fadeInUp}
-            className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-[#E5E7EB] shadow-lg"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="bg-white/90 backdrop-blur-sm rounded-3xl p-10 border border-[#E5E7EB] shadow-sm relative overflow-hidden group hover:border-red-100 transition-colors"
           >
-            <h3 className="text-2xl font-bold mb-6 text-[#111827]">Sem o Swapp:</h3>
-            <ul className="space-y-3 mb-6">
+            <div className="absolute top-0 right-0 p-4 opacity-10">
+              <Zap className="w-12 h-12 text-[#EF4444]" />
+            </div>
+            <h3 className="text-2xl font-bold mb-8 text-[#111827] flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-red-50 text-[#EF4444] flex items-center justify-center text-sm font-bold">01</span>
+              Do jeito antigo
+            </h3>
+            <ul className="space-y-4 mb-10">
               {semSwappSteps.map((step, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-[#4B5563]">
-                  <span className="text-[#EF4444] mt-1">✗</span>
-                  <span>{step}</span>
+                <li key={idx} className="flex items-center gap-4 text-[#4B5563] group-hover:translate-x-1 transition-transform">
+                  <div className="w-5 h-5 rounded-full border border-red-200 flex items-center justify-center shrink-0">
+                    <span className="text-[#EF4444] text-xs font-bold">✗</span>
+                  </div>
+                  <span className="text-sm md:text-base">{step}</span>
                 </li>
               ))}
             </ul>
-            <div className="pt-6 border-t border-[#E5E7EB]">
-              <p className="text-sm text-[#6B7280] mb-2">
-                <span className="font-semibold text-[#111827]">Tempo:</span> 15-30 minutos (se você souber fazer)
-              </p>
-              <p className="text-sm text-[#6B7280]">
-                <span className="font-semibold text-[#111827]">Acurácia:</span> Questionável
-              </p>
+            <div className="pt-8 border-t border-gray-100 grid grid-cols-2 gap-4">
+              <div className="bg-gray-50 p-4 rounded-2xl">
+                <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Esforço</p>
+                <p className="text-[#111827] font-bold">Muito alto</p>
+              </div>
+              <div className="bg-gray-50 p-4 rounded-2xl">
+                <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Resultado</p>
+                <p className="text-[#111827] font-bold">Incerto</p>
+              </div>
             </div>
           </motion.div>
 
           {/* Com o Swapp */}
           <motion.div
             variants={fadeInUp}
-            className="bg-gradient-to-br from-[#10B981]/10 to-[#34D399]/10 rounded-2xl p-8 border border-[#10B981]/30 shadow-lg backdrop-blur-sm"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-[#10B981] to-[#059669] rounded-3xl p-10 shadow-[0_20px_40px_rgba(16,185,129,0.2)] relative overflow-hidden text-white"
           >
-            <h3 className="text-2xl font-bold mb-6 text-[#111827]">Com o Swapp:</h3>
-            <div className="bg-[#10B981]/10 rounded-xl p-6 mb-6 border border-[#10B981]/20">
-              <p className="text-lg text-[#111827] mb-2 font-semibold">"Posso trocar X por Y?"</p>
-              <p className="text-[#10B981] text-sm font-medium">Resposta em 10 segundos</p>
+            <div className="absolute top-0 right-0 p-4 opacity-20">
+              <Sparkles className="w-16 h-16" />
             </div>
-            <div className="pt-6 border-t border-[#E5E7EB]">
-              <p className="text-sm text-[#6B7280] mb-2">
-                <span className="font-semibold text-[#111827]">Tempo:</span> 10 segundos
-              </p>
-              <p className="text-sm text-[#6B7280]">
-                <span className="font-semibold text-[#10B981]">Acurácia:</span> 100%
-              </p>
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">02</span>
+              Com o Swapp
+            </h3>
+            
+            <div className="space-y-6 mb-10">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                <p className="text-lg font-bold mb-2 flex items-center gap-2">
+                  <MessageCircle className="w-5 h-5" />
+                  "Posso trocar X por Y?"
+                </p>
+                <div className="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="h-full bg-white" 
+                  />
+                </div>
+                <p className="mt-3 text-white/90 text-sm font-medium">Resolvido em 10 segundos</p>
+              </div>
+
+              <ul className="space-y-4">
+                <li className="flex items-center gap-4">
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">Precisão nutricional total</span>
+                </li>
+                <li className="flex items-center gap-4">
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">Sem tabelas ou planilhas</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8 border-t border-white/20 grid grid-cols-2 gap-4">
+              <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+                <p className="text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1">Esforço</p>
+                <p className="font-bold">Zero</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+                <p className="text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1">Acurácia</p>
+                <p className="font-bold">100%</p>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Seção de Depoimentos */}
         <motion.div 
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-16"
           variants={fadeInUp}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-[#111827]">
-            🗣️ PROVA SOCIAL
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#ECFCCB] text-[#065F46] rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+            <Heart className="w-4 h-4" />
+            Histórias de Sucesso
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-[#111827]">
+            Quem usa, aprova
           </h2>
-          <p className="text-lg text-[#6B7280] mb-2">(Depoimentos)</p>
+          <p className="text-lg text-[#6B7280]">
+            Junte-se a centenas de pessoas que simplificaram sua alimentação.
+          </p>
         </motion.div>
 
         <motion.div
@@ -741,49 +795,70 @@ function Trust() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
+          className="relative px-12"
         >
           <Carousel
             setApi={setApi}
-            className="w-full max-w-5xl mx-auto"
+            className="w-full max-w-6xl mx-auto"
             opts={{
               align: "start",
               loop: true,
             }}
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="-ml-4 md:-ml-6">
               {depoimentos.map((depoimento, idx) => (
-                <CarouselItem key={idx} className="pl-2 md:pl-4 md:basis-1/2">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-[#E5E7EB] shadow-lg hover:border-[#10B981]/50 hover:shadow-xl transition-all h-full">
-                    <div className="flex flex-col items-center text-center mb-6">
-                      <div className="relative mb-4">
+                <CarouselItem key={idx} className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3">
+                  <div className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="relative">
                         <img
                           src={depoimento.foto}
                           alt={depoimento.nome}
-                          className="w-20 h-20 rounded-full object-cover border-4 border-[#10B981]/20 shadow-lg"
+                          className="w-14 h-14 rounded-2xl object-cover"
                         />
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#10B981] rounded-full border-4 border-white"></div>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-[#10B981] rounded-lg border-2 border-white flex items-center justify-center">
+                          <CheckCircle2 className="w-3 h-3 text-white" />
+                        </div>
                       </div>
-                      <div className="mb-2">
-                        <p className="text-sm text-[#10B981] font-semibold">
-                          Depoimento {idx + 1} - {depoimento.tipo}
-                        </p>
+                      <div>
+                        <p className="font-bold text-[#111827]">{depoimento.nome}</p>
+                        <p className="text-xs text-[#10B981] font-bold uppercase tracking-wider">{depoimento.resultado}</p>
                       </div>
                     </div>
-                    <p className="text-[#4B5563] leading-relaxed mb-6 italic text-center">
-                      "{depoimento.texto}"
-                    </p>
-                    <div className="pt-4 border-t border-[#E5E7EB] text-center">
-                      <p className="text-[#111827] font-semibold mb-1">
-                        — {depoimento.nome}{depoimento.idade ? `, ${depoimento.idade} anos` : ""}
+                    
+                    <div className="flex-1">
+                      <div className="flex gap-1 mb-4 text-[#F59E0B]">
+                        {[1, 2, 3, 4, 5].map((s) => <Zap key={s} className="w-4 h-4 fill-current" />)}
+                      </div>
+                      <p className="text-[#4B5563] leading-relaxed text-sm md:text-base font-medium italic">
+                        "{depoimento.texto}"
                       </p>
-                      <p className="text-[#10B981] text-sm font-medium">
-                        {depoimento.resultado}
-                      </p>
+                    </div>
+
+                    <div className="mt-8 pt-6 border-t border-gray-50">
+                      <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-[0.2em]">
+                        Foco: {depoimento.tipo}
+                      </span>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
+            
+            <div className="hidden md:block">
+              <button 
+                onClick={() => api?.scrollPrev()}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center text-[#111827] hover:bg-[#10B981] hover:text-white transition-all z-20"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button 
+                onClick={() => api?.scrollNext()}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center text-[#111827] hover:bg-[#10B981] hover:text-white transition-all z-20"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </Carousel>
 
           {/* Indicadores */}
