@@ -668,8 +668,8 @@ function Trust() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight text-[#111827]">
-            A MATEMÁTICA QUE O APP FAZ<br />
-            <span className="text-[#10B981]">(E Você Não Precisa)</span>
+            A matemática que o app faz<br />
+            <span className="text-[#10B981] italic font-serif">(e você não precisa)</span>
           </h2>
         </motion.div>
 
@@ -864,38 +864,46 @@ function Trust() {
 }
 
 function Pricing() {
-  const plans = [
-    {
-      name: "Plano Mensal",
-      price: "R$ 19,90",
-      period: "/mês",
-      description: "Flexibilidade para começar sua jornada.",
-      features: [
-        "Trocas ilimitadas de alimentos",
-        "Substituições de refeições completas",
-        "Base de dados com milhares de alimentos",
-        "Suporte via WhatsApp 24/7",
-        "Acesso via WhatsApp"
-      ],
-      buttonText: "Assinar Mensal",
-      highlight: false
-    },
-    {
-      name: "Plano Anual",
-      price: "R$ 14,90",
-      period: "/mês",
-      description: "O melhor custo-benefício para resultados duradouros.",
-      features: [
-        "Trocas ilimitadas de alimentos",
-        "Substituições de refeições completas",
-        "Base de dados com milhares de alimentos",
-        "Suporte via WhatsApp 24/7",
-        "Acesso via WhatsApp"
-      ],
-      buttonText: "Assinar Anual (Economize 25%)",
-      highlight: true
-    }
-  ];
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
+
+  const plans = {
+    monthly: [
+      {
+        name: "Plano Mensal",
+        price: "R$ 19,90",
+        period: "/mês",
+        description: "Flexibilidade para começar sua jornada.",
+        features: [
+          "Trocas ilimitadas de alimentos",
+          "Substituições de refeições completas",
+          "Base de dados com milhares de alimentos",
+          "Suporte via WhatsApp 24/7",
+          "Acesso via WhatsApp"
+        ],
+        buttonText: "Assinar Mensal",
+        highlight: false
+      }
+    ],
+    yearly: [
+      {
+        name: "Plano Anual",
+        price: "R$ 14,90",
+        period: "/mês",
+        description: "O melhor custo-benefício para resultados duradouros.",
+        features: [
+          "Trocas ilimitadas de alimentos",
+          "Substituições de refeições completas",
+          "Base de dados com milhares de alimentos",
+          "Suporte via WhatsApp 24/7",
+          "Acesso via WhatsApp"
+        ],
+        buttonText: "Assinar Anual (Economize 25%)",
+        highlight: true
+      }
+    ]
+  };
+
+  const currentPlan = plans[billingCycle][0];
 
   return (
     <section id="pricing" className="py-24 bg-white">
@@ -910,66 +918,78 @@ function Pricing() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#111827] mb-6 tracking-tight">
             Quanto vale nunca mais sair da dieta sem querer?
           </h2>
-          <p className="text-lg text-[#6B7280]">
+          <p className="text-lg text-[#6B7280] mb-10">
             Menos que um delivery saudável por semana. Mais que um app, um nutricionista de bolso que calcula tudo por você.
           </p>
+
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <span className={`text-sm font-bold ${billingCycle === "monthly" ? "text-[#111827]" : "text-[#6B7280]"}`}>Mensal</span>
+            <button 
+              onClick={() => setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly")}
+              className="w-14 h-7 bg-gray-100 rounded-full relative p-1 transition-colors"
+            >
+              <motion.div 
+                animate={{ x: billingCycle === "yearly" ? 28 : 0 }}
+                className="w-5 h-5 bg-[#10B981] rounded-full shadow-sm"
+              />
+            </button>
+            <span className={`text-sm font-bold ${billingCycle === "yearly" ? "text-[#111827]" : "text-[#6B7280]"}`}>
+              Anual <span className="text-[#10B981] text-[10px] ml-1 uppercase tracking-wider">-25% OFF</span>
+            </span>
+          </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {plans.map((plan, idx) => (
-            <motion.div
-              key={idx}
-              variants={fadeInUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className={`relative p-10 rounded-[2.5rem] border ${
-                plan.highlight 
-                  ? "border-[#10B981] shadow-xl ring-4 ring-[#10B981]/5" 
-                  : "border-[#E5E7EB]"
-              } flex flex-col h-full bg-white`}
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            key={billingCycle}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className={`relative p-10 rounded-[2.5rem] border ${
+              currentPlan.highlight 
+                ? "border-[#10B981] shadow-2xl ring-4 ring-[#10B981]/5" 
+                : "border-[#E5E7EB]"
+            } flex flex-col bg-white`}
+          >
+            {currentPlan.highlight && (
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-6 py-2 rounded-full text-[11px] font-bold shadow-lg flex items-center gap-2 whitespace-nowrap uppercase tracking-wider">
+                <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
+              </div>
+            )}
+            
+            <div className="mb-10 text-center">
+              <h3 className="text-2xl font-bold text-[#111827] mb-3">{currentPlan.name}</h3>
+              <div className="flex items-baseline justify-center gap-1">
+                <span className="text-5xl font-extrabold text-[#111827]">{currentPlan.price}</span>
+                {currentPlan.period && <span className="text-[#6B7280] font-medium">{currentPlan.period}</span>}
+              </div>
+              <p className="text-[#6B7280] mt-4 text-sm leading-relaxed">{currentPlan.description}</p>
+            </div>
+
+            <div className="flex-1">
+              <div className="bg-[#F9FAFB] rounded-2xl p-6 mb-10 border border-gray-50">
+                <p className="text-xs font-bold text-[#6B7280] uppercase tracking-[0.2em] mb-4">O que você ganha:</p>
+                <ul className="space-y-4">
+                  {currentPlan.features.map((feature, fIdx) => (
+                    <li key={fIdx} className="flex items-start gap-3 text-[#4B5563] text-sm font-medium leading-tight">
+                      <CheckCircle2 className="w-5 h-5 text-[#10B981] shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <button
+              className={`w-full py-5 rounded-2xl font-bold text-lg transition-all active:scale-95 ${
+                currentPlan.highlight
+                  ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-[0_15px_30px_rgba(16,185,129,0.25)]"
+                  : "bg-[#F3F4F6] text-[#111827] hover:bg-[#E5E7EB]"
+              }`}
             >
-              {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-6 py-2 rounded-full text-[11px] font-bold shadow-lg flex items-center gap-2 whitespace-nowrap uppercase tracking-wider">
-                  <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
-                </div>
-              )}
-              
-              <div className="mb-10 text-center">
-                <h3 className="text-2xl font-bold text-[#111827] mb-3">{plan.name}</h3>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-extrabold text-[#111827]">{plan.price}</span>
-                  {plan.period && <span className="text-[#6B7280] font-medium">{plan.period}</span>}
-                </div>
-                <p className="text-[#6B7280] mt-4 text-sm leading-relaxed">{plan.description}</p>
-              </div>
-
-              <div className="flex-1">
-                <div className="bg-[#F9FAFB] rounded-2xl p-6 mb-10 border border-gray-50">
-                  <p className="text-xs font-bold text-[#6B7280] uppercase tracking-[0.2em] mb-4">O que você ganha:</p>
-                  <ul className="space-y-4">
-                    {plan.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-3 text-[#4B5563] text-sm font-medium leading-tight">
-                        <CheckCircle2 className="w-5 h-5 text-[#10B981] shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <button
-                className={`w-full py-5 rounded-2xl font-bold text-lg transition-all active:scale-95 ${
-                  plan.highlight
-                    ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-[0_15px_30px_rgba(16,185,129,0.25)]"
-                    : "bg-[#F3F4F6] text-[#111827] hover:bg-[#E5E7EB]"
-                }`}
-              >
-                {plan.buttonText}
-              </button>
-            </motion.div>
-          ))}
+              {currentPlan.buttonText}
+            </button>
+          </motion.div>
         </div>
       </div>
     </section>
