@@ -13,7 +13,9 @@ import {
   Heart,
   Send,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Plus,
+  Minus
 } from "lucide-react";
 import heroPersonImage from "@assets/stock_images/happy_woman_holding__68eabf2a.jpg";
 import swappLogo from "@assets/Design sem nome (12).png";
@@ -668,8 +670,7 @@ function Trust() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight text-[#111827]">
-            A matemática que o app faz<br />
-            <span className="text-[#10B981] italic font-serif">(e você não precisa)</span>
+            A matemática que o app faz <span className="text-[#10B981] italic font-serif" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 'normal' }}>(e você não precisa)</span>
           </h2>
         </motion.div>
 
@@ -897,7 +898,7 @@ function Pricing() {
           "Suporte via WhatsApp 24/7",
           "Acesso via WhatsApp"
         ],
-        buttonText: "Assinar Anual (Economize 25%)",
+        buttonText: "Assinar Anual",
         highlight: true
       }
     ]
@@ -997,14 +998,16 @@ function Pricing() {
 }
 
 function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const faqs = [
     {
       question: "Preciso baixar algum aplicativo?",
       answer: "Não! O Swapp funciona inteiramente dentro do seu WhatsApp. É só clicar no link e começar a conversar."
     },
     {
-      question: "Como funciona a análise de fotos?",
-      answer: "Basta tirar uma foto do seu prato e enviar no chat. Nossa IA identifica os alimentos e porções para estimar as calorias e nutrientes."
+      question: "Como o app sabe o que eu posso trocar?",
+      answer: "O Swapp tem uma base de dados com milhares de alimentos e suas informações nutricionais completas. Quando você pede uma troca, a IA calcula quais alimentos têm perfil nutricional equivalente ao que você solicitou e substitui por kcal."
     },
     {
       question: "O Swapp substitui um nutricionista?",
@@ -1034,7 +1037,7 @@ function FAQ() {
           </p>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <motion.div
               key={idx}
@@ -1042,10 +1045,31 @@ function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white rounded-2xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm"
+              className="bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden"
             >
-              <h3 className="text-lg font-bold text-[#111827] mb-3">{faq.question}</h3>
-              <p className="text-[#6B7280] leading-relaxed">{faq.answer}</p>
+              <button
+                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-gray-50 transition-colors"
+              >
+                <h3 className="text-lg font-bold text-[#111827]">{faq.question}</h3>
+                <div className={`p-1.5 rounded-full bg-gray-100 text-[#6B7280] transition-transform duration-300 ${openIndex === idx ? "rotate-180" : ""}`}>
+                  {openIndex === idx ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                </div>
+              </button>
+              
+              <motion.div
+                initial={false}
+                animate={{ 
+                  height: openIndex === idx ? "auto" : 0,
+                  opacity: openIndex === idx ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <div className="px-6 pb-6 md:px-8 md:pb-8 text-[#6B7280] leading-relaxed border-t border-gray-50 pt-4">
+                  {faq.answer}
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
