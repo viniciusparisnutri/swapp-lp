@@ -777,7 +777,7 @@ function Trust() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="relative px-12"
+          className="relative px-4"
         >
           <Carousel
             setApi={setApi}
@@ -790,37 +790,19 @@ function Trust() {
             <CarouselContent className="-ml-4 md:-ml-6">
               {depoimentos.map((depoimento, idx) => (
                 <CarouselItem key={idx} className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="relative">
-                        <img
-                          src={depoimento.foto}
-                          alt={depoimento.nome}
-                          className="w-14 h-14 rounded-2xl object-cover"
-                        />
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-[#10B981] rounded-lg border-2 border-white flex items-center justify-center">
-                          <CheckCircle2 className="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                      <div>
-                        <p className="font-bold text-[#111827]">{depoimento.nome}</p>
-                        <p className="text-xs text-[#10B981] font-bold uppercase tracking-wider">{depoimento.resultado}</p>
-                      </div>
-                    </div>
-                    
+                  <div className="bg-white rounded-[2.5rem] p-10 border border-[#E5E7EB] shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 h-full flex flex-col">
                     <div className="flex-1">
-                      <div className="flex gap-1 mb-4 text-[#F59E0B]">
+                      <div className="flex gap-1 mb-6 text-[#F59E0B]">
                         {[1, 2, 3, 4, 5].map((s) => <Zap key={s} className="w-4 h-4 fill-current" />)}
                       </div>
-                      <p className="text-[#4B5563] leading-relaxed text-sm md:text-base font-medium italic">
+                      <p className="text-[#4B5563] leading-relaxed text-base font-medium italic mb-8">
                         "{depoimento.texto}"
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-gray-50">
-                      <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-[0.2em]">
-                        Foco: {depoimento.tipo}
-                      </span>
+                    <div className="mt-auto pt-6 border-t border-gray-50 flex flex-col gap-1">
+                      <p className="font-bold text-[#111827] text-lg">{depoimento.nome}</p>
+                      <p className="text-xs text-[#10B981] font-bold uppercase tracking-wider">{depoimento.resultado}</p>
                     </div>
                   </div>
                 </CarouselItem>
@@ -940,58 +922,62 @@ function Pricing() {
           </div>
         </motion.div>
 
-        <div className="max-w-xl mx-auto">
-          <motion.div
-            key={billingCycle}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className={`relative p-10 rounded-[2.5rem] border ${
-              currentPlan.highlight 
-                ? "border-[#10B981] shadow-2xl ring-4 ring-[#10B981]/5" 
-                : "border-[#E5E7EB]"
-            } flex flex-col bg-white`}
-          >
-            {currentPlan.highlight && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-6 py-2 rounded-full text-[11px] font-bold shadow-lg flex items-center gap-2 whitespace-nowrap uppercase tracking-wider">
-                <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
-              </div>
-            )}
-            
-            <div className="mb-10 text-center">
-              <h3 className="text-2xl font-bold text-[#111827] mb-3">{currentPlan.name}</h3>
-              <div className="flex items-baseline justify-center gap-1">
-                <span className="text-5xl font-extrabold text-[#111827]">{currentPlan.price}</span>
-                {currentPlan.period && <span className="text-[#6B7280] font-medium">{currentPlan.period}</span>}
-              </div>
-              <p className="text-[#6B7280] mt-4 text-sm leading-relaxed">{currentPlan.description}</p>
-            </div>
-
-            <div className="flex-1">
-              <div className="bg-[#F9FAFB] rounded-2xl p-6 mb-10 border border-gray-50">
-                <p className="text-xs font-bold text-[#6B7280] uppercase tracking-[0.2em] mb-4">O que você ganha:</p>
-                <ul className="space-y-4">
-                  {currentPlan.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-3 text-[#4B5563] text-sm font-medium leading-tight">
-                      <CheckCircle2 className="w-5 h-5 text-[#10B981] shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <button
-              className={`w-full py-5 rounded-2xl font-bold text-lg transition-all active:scale-95 ${
-                currentPlan.highlight
-                  ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-[0_15px_30px_rgba(16,185,129,0.25)]"
-                  : "bg-[#F3F4F6] text-[#111827] hover:bg-[#E5E7EB]"
-              }`}
+            <motion.div
+              key={billingCycle}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className={`relative p-10 rounded-[2.5rem] border ${
+                currentPlan.highlight 
+                  ? "border-[#10B981] shadow-[0_20px_50px_rgba(0,0,0,0.1)] ring-4 ring-[#10B981]/5" 
+                  : "border-[#E5E7EB]"
+              } flex flex-col bg-white`}
             >
-              {currentPlan.buttonText}
-            </button>
-          </motion.div>
-        </div>
+              {currentPlan.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#10B981] text-white px-6 py-2 rounded-full text-[11px] font-bold shadow-lg flex items-center gap-2 whitespace-nowrap uppercase tracking-wider">
+                  <span className="text-sm">★</span> MAIS POPULAR
+                </div>
+              )}
+              
+              <div className="mb-10">
+                <h3 className="text-2xl font-bold text-[#111827] mb-3">{billingCycle === "yearly" ? "Anual" : "Mensal"}</h3>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-extrabold text-[#111827]">{currentPlan.price}</span>
+                  {currentPlan.period && <span className="text-[#6B7280] font-medium text-xl">{currentPlan.period}</span>}
+                </div>
+                {currentPlan.highlight && (
+                  <p className="text-[#F59E0B] mt-4 text-sm font-bold flex items-center gap-2">
+                    <span>⭐</span> Escolha de quem leva a dieta a sério sem neura
+                  </p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <div className="mb-10">
+                  <p className="text-base font-bold text-[#111827] mb-6">O que você ganha:</p>
+                  <ul className="space-y-5">
+                    {currentPlan.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-4 text-[#111827] text-base font-medium leading-tight">
+                        <div className="w-6 h-6 rounded-full border-2 border-[#10B981] flex items-center justify-center shrink-0">
+                          <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                        </div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <button
+                className={`w-full py-5 rounded-[1.25rem] font-bold text-lg transition-all active:scale-95 ${
+                  currentPlan.highlight
+                    ? "bg-[#10B981] text-white hover:bg-[#059669] shadow-[0_15px_30px_rgba(16,185,129,0.25)]"
+                    : "bg-[#F3F4F6] text-[#111827] hover:bg-[#E5E7EB]"
+                }`}
+              >
+                {currentPlan.buttonText}
+              </button>
+            </motion.div>
       </div>
     </section>
   );
