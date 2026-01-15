@@ -675,100 +675,77 @@ function Trust() {
 
         {/* Comparação Sem/Com Swapp */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {/* Sem o Swapp */}
           <motion.div
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="bg-white/90 backdrop-blur-sm rounded-3xl p-10 border border-[#E5E7EB] shadow-sm relative overflow-hidden group hover:border-red-100 transition-colors"
+            className="relative"
           >
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Zap className="w-12 h-12 text-[#EF4444]" />
-            </div>
-            <h3 className="text-2xl font-bold mb-8 text-[#111827] flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-red-50 text-[#EF4444] flex items-center justify-center text-sm font-bold">01</span>
-              Do jeito antigo
-            </h3>
-            <ul className="space-y-4 mb-10">
-              {semSwappSteps.map((step, idx) => (
-                <li key={idx} className="flex items-center gap-4 text-[#4B5563] group-hover:translate-x-1 transition-transform">
-                  <div className="w-5 h-5 rounded-full border border-red-200 flex items-center justify-center shrink-0">
-                    <span className="text-[#EF4444] text-xs font-bold">✗</span>
-                  </div>
-                  <span className="text-sm md:text-base">{step}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="pt-8 border-t border-gray-100 grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 p-4 rounded-2xl">
-                <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Esforço</p>
-                <p className="text-[#111827] font-bold">Muito alto</p>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-2xl">
-                <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Resultado</p>
-                <p className="text-[#111827] font-bold">Incerto</p>
+            <span className="text-7xl font-bold text-red-500/10 absolute -top-4 -left-2">
+              01
+            </span>
+            <div className="relative pt-12">
+              <h3 className="text-xl font-semibold text-[#111827] mb-3">Sem o Swapp:</h3>
+              <ul className="space-y-3">
+                {semSwappSteps.map((step, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-[#4B5563]">
+                    <span className="text-[#EF4444] mt-1">✗</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-6 border-t border-gray-100 flex gap-6">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Tempo</p>
+                  <p className="text-[#111827] font-bold text-sm">15-30 min</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Acurácia</p>
+                  <p className="text-[#111827] font-bold text-sm">Questionável</p>
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Com o Swapp */}
           <motion.div
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-[#10B981] to-[#059669] rounded-3xl p-10 shadow-[0_20px_40px_rgba(16,185,129,0.2)] relative overflow-hidden text-white"
+            className="relative"
           >
-            <div className="absolute top-0 right-0 p-4 opacity-20">
-              <Sparkles className="w-16 h-16" />
-            </div>
-            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">02</span>
-              Com o Swapp
-            </h3>
-            
-            <div className="space-y-6 mb-10">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <p className="text-lg font-bold mb-2 flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5" />
+            <span className="text-7xl font-bold text-[#10B981]/10 absolute -top-4 -left-2">
+              02
+            </span>
+            <div className="relative pt-12">
+              <h3 className="text-xl font-semibold text-[#111827] mb-3">Com o Swapp:</h3>
+              <div className="bg-[#10B981]/10 rounded-xl p-4 mb-4 border border-[#10B981]/20">
+                <p className="text-[#111827] font-semibold flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 text-[#10B981]" />
                   "Posso trocar X por Y?"
                 </p>
-                <div className="h-1 w-full bg-white/20 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-white" 
-                  />
-                </div>
-                <p className="mt-3 text-white/90 text-sm font-medium">Resolvido em 10 segundos</p>
+                <p className="text-[#10B981] text-xs font-medium mt-1">Resolvido em 10 segundos</p>
               </div>
-
-              <ul className="space-y-4">
-                <li className="flex items-center gap-4">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <span className="font-medium">Precisão nutricional total</span>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-3 text-[#4B5563]">
+                  <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                  <span>Precisão nutricional total</span>
                 </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <span className="font-medium">Sem tabelas ou planilhas</span>
+                <li className="flex items-center gap-3 text-[#4B5563]">
+                  <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                  <span>Sem tabelas ou planilhas</span>
                 </li>
               </ul>
-            </div>
-
-            <div className="pt-8 border-t border-white/20 grid grid-cols-2 gap-4">
-              <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
-                <p className="text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1">Esforço</p>
-                <p className="font-bold">Zero</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl">
-                <p className="text-[10px] uppercase tracking-wider text-white/60 font-bold mb-1">Acurácia</p>
-                <p className="font-bold">100%</p>
+              <div className="mt-6 pt-6 border-t border-gray-100 flex gap-6">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Tempo</p>
+                  <p className="text-[#10B981] font-bold text-sm">10 segundos</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6B7280] font-bold mb-1">Acurácia</p>
+                  <p className="text-[#10B981] font-bold text-sm">100%</p>
+                </div>
               </div>
             </div>
           </motion.div>
